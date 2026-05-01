@@ -93,7 +93,7 @@ export function EregistryHero({
       )}
 
       {/* Hero content */}
-      <div className="container-page relative z-10 pt-12 md:pt-20 pb-16 md:pb-24 text-center">
+      <div className="container-page relative z-10 pt-6 md:pt-10 pb-8 md:pb-12 text-center">
         {eyebrow && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -186,7 +186,7 @@ export function EregistryHero({
               <button
                 key={i}
                 onClick={s.onClick}
-                className="relative shrink-0 w-64 md:w-72 aspect-[3/4] rounded-2xl overflow-hidden border border-sand-200 shadow-soft group text-left"
+                className="relative shrink-0 w-[400px] h-[250px] rounded-2xl overflow-hidden border border-sand-200 shadow-soft group text-left"
               >
                 <img
                   src={s.image}

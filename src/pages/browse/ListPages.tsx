@@ -14,9 +14,10 @@ interface ListPageProps {
   eyebrow: string;
   items: { id: string; name: string; count?: number; meta?: string }[];
   linkBase: string;
+  linkFn?: (id: string) => string;
 }
 
-const ListPage = ({ title, description, eyebrow, items, linkBase }: ListPageProps) => (
+const ListPage = ({ title, description, eyebrow, items, linkBase, linkFn }: ListPageProps) => (
   <PublicLayout>
     <PageHeader
       eyebrow={eyebrow}
@@ -29,7 +30,7 @@ const ListPage = ({ title, description, eyebrow, items, linkBase }: ListPageProp
         {items.map((it) => (
           <Link
             key={it.id}
-            to={`${linkBase}/${it.id}`}
+            to={linkFn ? linkFn(it.id) : `${linkBase}/${it.id}`}
             className="group bg-white border border-sand-200 rounded-2xl p-6 hover:border-copper-500/40 hover:shadow-soft transition-all flex items-center justify-between gap-4"
           >
             <div>
@@ -62,7 +63,7 @@ export const BrowseJurisdictions = () => {
 };
 
 export const BrowseIndustries = () => {
-  const { data } = useIndustries({ per_page: 100, order_by: 'name', order_dir: 'ASC', show_in_browse: 1 });
+  const { data } = useIndustries({ per_page: 100, order_by: 'name', order_dir: 'ASC' });
   const items = (data?.data ?? []).map((i) => ({ id: String(i.id), name: i.name, count: i.license_count }));
   return (
     <ListPage
@@ -70,6 +71,7 @@ export const BrowseIndustries = () => {
       title="Industries"
       description="Explore industries and the licences that govern them."
       items={items}
+      linkFn={(id) => `/browse/licenses?industry_id=${id}`}
       linkBase="/browse/licenses"
     />
   );

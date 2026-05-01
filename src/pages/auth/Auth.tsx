@@ -38,6 +38,14 @@ export const Login = () => {
           <button type="button" className="border border-sand-200 rounded-lg py-2.5 text-sm font-medium hover:bg-sand-100 transition-colors">Google</button>
           <button type="button" className="border border-sand-200 rounded-lg py-2.5 text-sm font-medium hover:bg-sand-100 transition-colors">Facebook</button>
         </div>
+        <div className="pt-4 border-t border-sand-200">
+          <Link 
+            to="/login-admin" 
+            className="block w-full text-center border border-earth-900/20 bg-earth-900/5 rounded-lg py-2.5 text-sm font-medium text-earth-900 hover:bg-earth-900/10 transition-colors"
+          >
+            Admin Portal
+          </Link>
+        </div>
       </form>
     </AuthShell>
   );

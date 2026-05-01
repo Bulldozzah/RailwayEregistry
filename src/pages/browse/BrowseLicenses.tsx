@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { Search, Filter, ArrowRight, X, ChevronLeft, ChevronRight, ChevronDown, Loader2 } from "lucide-react";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -42,13 +42,14 @@ const FilterDropdown = ({
 
 export const BrowseLicenses = () => {
   const { slug, id } = useParams();
+  const [searchParams] = useSearchParams();
 
   const [q, setQ] = useState("");
   const [debouncedQ, setDebouncedQ] = useState("");
   const [selectedAgencyId, setSelectedAgencyId] = useState<string>("");
   const [selectedLocationId, setSelectedLocationId] = useState<string>("");
-  const [selectedIndustryId, setSelectedIndustryId] = useState<string>("");
-  const [selectedBusinessTypeId, setSelectedBusinessTypeId] = useState<string>("");
+  const [selectedIndustryId, setSelectedIndustryId] = useState<string>(searchParams.get("industry_id") || "");
+  const [selectedBusinessTypeId, setSelectedBusinessTypeId] = useState<string>(searchParams.get("business_type_id") || "");
   const [page, setPage] = useState(1);
 
   // Debounce search

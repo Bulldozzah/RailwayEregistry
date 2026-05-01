@@ -54,28 +54,21 @@ const Index = () => {
   return (
     <PublicLayout>
       <EregistryHero
-        eyebrow="Official Government Portal"
-        title={"Start your enterprise. Find the right permits."}
-        subtitle="The official portal for business registration and compliance in Zambia. Navigate licensing, regulations and public consultation with clarity and confidence."
+        title={"Zambia Business Licensing Information Portal"}
+        subtitle="Businesses operating in Zambia are typically required to obtain one or more licenses and permits, depending on the activities of their enterprise. This website enables you to obtain information on the licenses pertaining to your business. Use the search below to find the licenses you will require to start your business."
         primaryAction={{ label: "Find Licenses", onClick: () => navigate("/browse/licenses") }}
         secondaryAction={{ label: "Browse Sectors", onClick: () => navigate("/browse/listindustries") }}
-        disclaimer="*Free to search · Updated daily by issuing authorities"
-        socialProof={{
-          avatars: [
-            "https://i.pravatar.cc/80?img=11",
-            "https://i.pravatar.cc/80?img=22",
-            "https://i.pravatar.cc/80?img=33",
-            "https://i.pravatar.cc/80?img=44",
-          ],
-          text: "Trusted by 12,500+ Zambian entrepreneurs",
-        }}
         sectors={[
-          { image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=800&fit=crop", category: "AGRICULTURE", title: "Crop & livestock permits", onClick: () => navigate("/browse/licenses") },
-          { image: "https://images.unsplash.com/photo-1605470207050-39ed1ce3aa70?w=600&h=800&fit=crop", category: "MINING", title: "Exploration & extraction", onClick: () => navigate("/browse/licenses") },
-          { image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&h=800&fit=crop", category: "TRADE", title: "Retail & trading certificates", onClick: () => navigate("/browse/licenses") },
-          { image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=800&fit=crop", category: "TOURISM", title: "Lodge & tour operator licenses", onClick: () => navigate("/browse/licenses") },
-          { image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=800&fit=crop", category: "MANUFACTURING", title: "Industrial compliance permits", onClick: () => navigate("/browse/licenses") },
-          { image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=800&fit=crop", category: "HEALTH", title: "Clinical practice authorizations", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/agriculture.jpg", category: "AGRICULTURE", title: "Crop & livestock permits", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/mining.jpg", category: "MINING", title: "Exploration & extraction", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/trade.jpg", category: "TRADE", title: "Retail & trading certificates", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/tourism.jpg", category: "TOURISM", title: "Lodge & tour operator licenses", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/manufacturing.jpg", category: "MANUFACTURING", title: "Industrial compliance permits", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/health.jpg", category: "HEALTH", title: "Clinical practice authorizations", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/telecoms.jpg", category: "TELECOMS", title: "Telecommunications licenses", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/pharma.jpg", category: "PHARMA", title: "Pharmaceutical registrations", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/livestock.jpg", category: "LIVESTOCK", title: "Livestock & veterinary permits", onClick: () => navigate("/browse/licenses") },
+          { image: "/images/industries/education.jpg", category: "EDUCATION", title: "Educational institution licenses", onClick: () => navigate("/browse/licenses") },
         ]}
       />
 
@@ -88,11 +81,11 @@ const Index = () => {
             { to: "/browse/listactivities", icon: Briefcase, label: "By Activity" },
             { to: "/business-procedures", icon: Building2, label: "Startup Procedures" },
           ].map((q) => (
-            <Link key={q.to} to={q.to} className="group bg-white border border-sand-200 rounded-2xl p-6 flex items-center gap-4 hover:border-copper-500/40 hover:shadow-soft transition-all">
-              <div className="size-10 rounded-xl bg-copper-50 flex items-center justify-center text-copper-600 group-hover:bg-copper-500 group-hover:text-white transition-colors">
-                <q.icon size={18} />
+            <Link key={q.to} to={q.to} className="group bg-white border border-sand-200 rounded-2xl p-4 flex items-center justify-center gap-3 hover:border-copper-500/40 hover:shadow-soft transition-all">
+              <div className="size-9 rounded-xl bg-copper-50 flex items-center justify-center text-copper-600 group-hover:bg-copper-500 group-hover:text-white transition-colors shrink-0">
+                <q.icon size={16} />
               </div>
-              <span className="font-medium">{q.label}</span>
+              <span className="font-medium text-sm">{q.label}</span>
             </Link>
           ))}
         </div>

@@ -14,11 +14,14 @@ const nav = [
 export const SiteHeader = () => {
   const [open, setOpen] = useState(false);
   return (
-    <header className="border-b border-sand-200/60 bg-sand-50/85 backdrop-blur-md sticky top-0 z-50">
+    <header className="border-b border-sand-200/60 bg-white backdrop-blur-md sticky top-0 z-50">
       <div className="container-page h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="size-7 rounded-full bg-gradient-to-br from-copper-500 to-copper-600 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]" />
-          <span className="font-serif text-xl tracking-tight font-medium">Zambia eRegistry</span>
+        <Link to="/" className="flex items-center shrink-0">
+          <img 
+            src="/images/zambia-logo.png" 
+            alt="Republic of Zambia Business Licensing Portal" 
+            className="h-14 w-auto"
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
