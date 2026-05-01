@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* eRegistry Zambia — Warm Copper Editorial design system.
+   All colors MUST be HSL. */
+
+@layer base {
+  :root {
+    --background: 36 33% 98%;          /* sand-50 */
+    --foreground: 14 18% 18%;          /* earth-900 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 14 18% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 14 18% 18%;
+
+    --primary: 16 53% 52%;             /* copper-500 */
+    --primary-foreground: 36 33% 98%;
+    --primary-hover: 16 55% 43%;       /* copper-600 */
+    --primary-deep: 14 55% 19%;        /* copper-900 */
+
+    --secondary: 32 22% 93%;           /* sand-100 */
+    --secondary-foreground: 14 18% 18%;
+
+    --muted: 32 22% 93%;
+    --muted-foreground: 16 12% 38%;
+
+    --accent: 16 60% 95%;              /* copper-50 */
+    --accent-foreground: 16 55% 35%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 36 33% 98%;
+
+    --border: 32 20% 87%;              /* sand-200 */
+    --input: 32 20% 87%;
+    --ring: 16 53% 52%;
+
+    --earth-800: 14 14% 21%;
+    --earth-900: 14 18% 15%;
+    --sand-50: 36 33% 98%;
+    --sand-100: 32 22% 93%;
+    --sand-200: 32 20% 87%;
+    --copper-50: 16 60% 95%;
+    --copper-100: 16 50% 93%;
+    --copper-500: 16 53% 52%;
+    --copper-600: 16 55% 43%;
+    --copper-900: 14 55% 19%;
+
+    --radius: 1rem;
+
+    --shadow-soft: 0 8px 30px -8px hsl(14 18% 15% / 0.08);
+    --shadow-card: 0 12px 40px -12px hsl(16 53% 52% / 0.15);
+
+    --sidebar-background: 32 22% 96%;
+    --sidebar-foreground: 14 18% 18%;
+    --sidebar-primary: 16 53% 52%;
+    --sidebar-primary-foreground: 36 33% 98%;
+    --sidebar-accent: 32 22% 93%;
+    --sidebar-accent-foreground: 14 18% 18%;
+    --sidebar-border: 32 20% 87%;
+    --sidebar-ring: 16 53% 52%;
+  }
+
+  .dark {
+    --background: 14 18% 10%;
+    --foreground: 36 33% 96%;
+    --card: 14 18% 12%;
+    --card-foreground: 36 33% 96%;
+    --popover: 14 18% 12%;
+    --popover-foreground: 36 33% 96%;
+    --primary: 16 53% 55%;
+    --primary-foreground: 14 18% 10%;
+    --secondary: 14 14% 18%;
+    --secondary-foreground: 36 33% 96%;
+    --muted: 14 14% 18%;
+    --muted-foreground: 32 15% 65%;
+    --accent: 14 14% 18%;
+    --accent-foreground: 36 33% 96%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 36 33% 96%;
+    --border: 14 14% 22%;
+    --input: 14 14% 22%;
+    --ring: 16 53% 55%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  body { @apply bg-background text-foreground antialiased; }
+  .font-serif { font-family: 'Fraunces', Georgia, serif; }
+}
+
+@layer components {
+  .container-page { @apply max-w-[1440px] mx-auto px-6 md:px-8; }
+}
