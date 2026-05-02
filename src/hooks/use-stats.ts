@@ -8,6 +8,13 @@ export function useDashboardStats() {
   });
 }
 
+export function useClickSummary(startDate?: string, endDate?: string) {
+  return useQuery({
+    queryKey: ['click-summary', startDate, endDate],
+    queryFn: () => statsService.getClickSummary(startDate, endDate),
+  });
+}
+
 export function useHealthCheck() {
   return useQuery({
     queryKey: ['health'],

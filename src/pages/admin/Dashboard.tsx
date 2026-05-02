@@ -1,10 +1,12 @@
 import { AdminLayout } from "@/components/layout/AdminLayout";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   FileText, Building2, Users, Newspaper, MessageSquare, MapPin, Briefcase,
-  TrendingUp, TrendingDown, Activity, ArrowRight, CheckCircle2, Clock, Loader2
+  TrendingUp, TrendingDown, Activity, ArrowRight, CheckCircle2, Clock, Loader2,
+  ExternalLink, Globe, MousePointerClick, Calendar
 } from "lucide-react";
-import { useDashboardStats } from "@/hooks/use-stats";
+import { useDashboardStats, useClickSummary } from "@/hooks/use-stats";
 import { useLicenses } from "@/hooks/use-licenses";
 
 const statusColors: Record<string, string> = {
@@ -17,6 +19,10 @@ const statusColors: Record<string, string> = {
 const Dashboard = () => {
   const { data: statsResponse } = useDashboardStats();
   const st = statsResponse?.data;
+  const [clickStartDate, setClickStartDate] = useState<string>("");
+  const [clickEndDate, setClickEndDate] = useState<string>("");
+  const { data: clickResponse } = useClickSummary(clickStartDate || undefined, clickEndDate || undefined);
+  const clicks = clickResponse?.data;
   const { data: recentData } = useLicenses({ per_page: 4, order_by: 'id', order_dir: 'DESC' });
 
   const stats = [
@@ -25,7 +31,7 @@ const Dashboard = () => {
     { label: "Locations", value: String(st?.locations ?? 0), icon: MapPin },
     { label: "Industries", value: String(st?.industries ?? 0), icon: Briefcase },
     { label: "Regulations", value: String(st?.regulations ?? 0), icon: FileText },
-    { label: "Users", value: String(st?.users ?? 0), icon: Users },
+    { label: "External Clicks", value: String(clicks?.total_clicks ?? 0), icon: MousePointerClick },
   ];
 
   const recentLicenses = (recentData?.data ?? []).map((l) => ({
@@ -99,6 +105,90 @@ const Dashboard = () => {
             ))}
           </tbody>
         </table>
+      </div>
+    </div>
+
+    {/* External Link Clicks */}
+    <div className="mt-6">
+      <div className="flex items-center justify-between flex-wrap gap-4 mb-4">
+        <div className="flex items-center gap-2">
+          <MousePointerClick size={20} className="text-copper-600" />
+          <h2 className="font-serif text-xl font-medium">External Link Clicks</h2>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Calendar size={14} className="text-muted-foreground" />
+            <input
+              type="date"
+              value={clickStartDate}
+              onChange={(e) => setClickStartDate(e.target.value)}
+              className="h-9 px-3 rounded-lg border border-sand-200 text-sm bg-white"
+              placeholder="Start date"
+            />
+            <span className="text-muted-foreground text-sm">to</span>
+            <input
+              type="date"
+              value={clickEndDate}
+              onChange={(e) => setClickEndDate(e.target.value)}
+              className="h-9 px-3 rounded-lg border border-sand-200 text-sm bg-white"
+              placeholder="End date"
+            />
+          </div>
+          {(clickStartDate || clickEndDate) && (
+            <button
+              onClick={() => { setClickStartDate(""); setClickEndDate(""); }}
+              className="text-xs text-copper-600 hover:text-copper-900 font-medium"
+            >
+              Clear dates
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+      <div className="bg-white border border-sand-200 rounded-2xl p-6">
+        <div className="flex items-center gap-2 mb-5">
+          <Globe size={18} className="text-copper-600" />
+          <h2 className="font-serif text-xl font-medium">Top Clicked Agencies</h2>
+        </div>
+        {(clicks?.top_agencies?.length ?? 0) === 0 ? (
+          <p className="text-sm text-muted-foreground">No external link clicks recorded yet.</p>
+        ) : (
+          <div className="space-y-3">
+            {clicks?.top_agencies?.map((a, i) => (
+              <div key={i} className="flex items-center justify-between py-2 border-b border-sand-100 last:border-0">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-muted-foreground tabular-nums w-5">{i + 1}.</span>
+                  <span className="text-sm font-medium">{a.agency_name}</span>
+                </div>
+                <span className="text-sm tabular-nums font-medium bg-copper-50 text-copper-700 px-2.5 py-0.5 rounded-full">{a.clicks}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="bg-white border border-sand-200 rounded-2xl p-6">
+        <div className="flex items-center gap-2 mb-5">
+          <ExternalLink size={18} className="text-copper-600" />
+          <h2 className="font-serif text-xl font-medium">Top Clicked Licences</h2>
+        </div>
+        {(clicks?.top_licenses?.length ?? 0) === 0 ? (
+          <p className="text-sm text-muted-foreground">No external link clicks recorded yet.</p>
+        ) : (
+          <div className="space-y-3">
+            {clicks?.top_licenses?.map((l, i) => (
+              <div key={i} className="flex items-center justify-between py-2 border-b border-sand-100 last:border-0">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold text-muted-foreground tabular-nums w-5">{i + 1}.</span>
+                  <span className="text-sm font-medium">{l.license_name}</span>
+                </div>
+                <span className="text-sm tabular-nums font-medium bg-copper-50 text-copper-700 px-2.5 py-0.5 rounded-full">{l.clicks}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       </div>
     </div>
   </AdminLayout>

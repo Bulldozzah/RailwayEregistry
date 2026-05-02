@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { useLicense } from "@/hooks/use-licenses";
+import { api } from "@/services/api";
 import {
   Calendar, Clock, Coins, MapPin, Building2, FileDown, Printer,
   ExternalLink, ArrowLeft, CheckCircle2, Loader2, Mail, Phone,
@@ -51,6 +52,36 @@ const LicenseDetail = () => {
   const { data: licResponse, isLoading } = useLicense(id);
   const lic = licResponse?.data as any;
   const [activeTab, setActiveTab] = useState<"details" | "legal" | "agency">("details");
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const trackClick = useCallback((url: string) => {
+    if (!lic) return;
+    const payload = { license_id: lic.id, license_name: lic.name, agency_id: lic.agency_id, url };
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+    try {
+      navigator.sendBeacon(
+        `${baseUrl}/link-clicks`,
+        new Blob([JSON.stringify(payload)], { type: 'application/json' })
+      );
+    } catch (e) {
+      api.post('/link-clicks', payload).catch(() => {});
+    }
+  }, [lic?.id, lic?.name, lic?.agency_id]);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const handler = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest('a[href]') as HTMLAnchorElement | null;
+      if (!anchor) return;
+      const href = anchor.href;
+      if (href && (href.startsWith('http://') || href.startsWith('https://')) && !href.includes(window.location.host)) {
+        trackClick(href);
+      }
+    };
+    el.addEventListener('click', handler);
+    return () => el.removeEventListener('click', handler);
+  }, [trackClick]);
 
   if (isLoading) {
     return (
@@ -103,7 +134,7 @@ const LicenseDetail = () => {
         ]}
       />
 
-      <section className="container-page py-12">
+      <section className="container-page py-12" ref={containerRef}>
         <Link to="/browse/licenses" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
           <ArrowLeft size={14} /> Back to all licences
         </Link>

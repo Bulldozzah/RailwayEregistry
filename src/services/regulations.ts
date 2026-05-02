@@ -55,4 +55,16 @@ export const regulationService = {
   submitComment(regulationId: number | string, data: CommentSubmission) {
     return api.post<ApiResponse<{ id: number }>>(`/regulations/${regulationId}/comments`, data);
   },
+
+  create(data: Record<string, any>) {
+    return api.post<ApiResponse<Regulation>>('/regulations', data);
+  },
+
+  update(id: number | string, data: Record<string, any>) {
+    return api.put<ApiResponse<Regulation>>(`/regulations/${id}`, data);
+  },
+
+  delete(id: number | string) {
+    return api.delete<ApiResponse<any>>(`/regulations/${id}`);
+  },
 };

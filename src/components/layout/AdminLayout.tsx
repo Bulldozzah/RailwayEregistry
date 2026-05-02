@@ -18,8 +18,8 @@ const sections = [
     label: "eRegistry",
     items: [
       { to: "/login-admin/managelicenses", label: "Business Licenses", icon: FileText },
-      { to: "/login-admin/manageagencies", label: "Agencies", icon: Building2 },
-      { to: "/login-admin/managelocations", label: "Locations", icon: Building2 },
+      { to: "/login-admin/manageagencies", label: "Issuing Authorities", icon: Building2 },
+      { to: "/login-admin/managelocations", label: "Jurisdictions", icon: Building2 },
       { to: "/login-admin/manageindustries", label: "Industries", icon: BookOpen },
       { to: "/login-admin/managebusinesstypes", label: "Business Types", icon: BookOpen },
       { to: "/login-admin/manageactivities", label: "Business Activities", icon: BookOpen },
@@ -116,7 +116,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }) => {
           <div className="flex items-center flex-1 max-w-md bg-white border border-sand-200 rounded-full px-4 h-10">
             <Search size={16} className="text-muted-foreground mr-2" />
             <input
-              placeholder="Search licenses, agencies, users…"
+              placeholder="Search licenses, issuing authorities, users…"
               className="bg-transparent outline-none text-sm flex-1"
             />
           </div>

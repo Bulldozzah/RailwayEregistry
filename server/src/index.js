@@ -13,6 +13,9 @@ import regulationsRouter from './routes/regulations.js';
 import contentRouter from './routes/content.js';
 import workflowsRouter from './routes/workflows.js';
 import searchRouter from './routes/search.js';
+import linkClicksRouter from './routes/linkclicks.js';
+import licenseAdminRouter from './routes/license-admin.js';
+import usersRouter from './routes/users.js';
 
 dotenv.config();
 
@@ -34,6 +37,12 @@ app.use('/api/regulations', regulationsRouter);
 app.use('/api/content', contentRouter);
 app.use('/api/workflows', workflowsRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/link-clicks', linkClicksRouter);
+app.use('/api/license-admin', licenseAdminRouter);
+app.use('/api/users', usersRouter);
+
+// Serve uploaded files
+app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')));
 
 // Health check
 app.get('/api/health', async (req, res) => {

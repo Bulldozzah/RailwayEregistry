@@ -15,6 +15,14 @@ export interface DashboardStats {
   news: number;
 }
 
+export interface ClickSummary {
+  total_clicks: number;
+  unique_links: number;
+  top_agencies: { agency_name: string; clicks: number }[];
+  top_licenses: { license_name: string; clicks: number }[];
+  daily_clicks: { date: string; clicks: number }[];
+}
+
 export const statsService = {
   getDashboardStats() {
     return api.get<{ success: boolean; data: DashboardStats }>('/stats');
@@ -22,5 +30,12 @@ export const statsService = {
 
   healthCheck() {
     return api.get<{ status: string; database: string }>('/health');
+  },
+
+  getClickSummary(startDate?: string, endDate?: string) {
+    return api.get<{ success: boolean; data: ClickSummary }>('/link-clicks/summary', {
+      start_date: startDate || undefined,
+      end_date: endDate || undefined,
+    });
   },
 };

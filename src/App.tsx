@@ -25,6 +25,10 @@ import {
 import BusinessTypeForm from "./pages/admin/BusinessTypeForm";
 import BusinessActivityForm from "./pages/admin/BusinessActivityForm";
 import IssuingAuthorityForm from "./pages/admin/IssuingAuthorityForm";
+import LicenseForm from "./pages/admin/LicenseForm";
+import LicenseShow from "./pages/admin/LicenseShow";
+import JurisdictionForm from "./pages/admin/JurisdictionForm";
+import ConsultationForm from "./pages/admin/ConsultationForm";
 import UserForm from "./pages/admin/UserForm";
 import { RequireAdmin } from "./components/auth/RequireAdmin";
 
@@ -83,10 +87,16 @@ const App = () => (
           <Route path="/login-admin/admin/dashboard" element={<RequireAdmin><Dashboard /></RequireAdmin>} />
           <Route path="/login-admin/search" element={<RequireAdmin><AdminSearch /></RequireAdmin>} />
           <Route path="/login-admin/managelicenses" element={<RequireAdmin><ManageLicenses /></RequireAdmin>} />
+          <Route path="/login-admin/managelicenses/new" element={<RequireAdmin><LicenseForm /></RequireAdmin>} />
+          <Route path="/login-admin/managelicenses/:id/edit" element={<RequireAdmin><LicenseForm /></RequireAdmin>} />
+          <Route path="/login-admin/managelicenses/:id/show" element={<RequireAdmin><LicenseShow /></RequireAdmin>} />
           <Route path="/login-admin/managelicenses/:rest" element={<RequireAdmin><ManageLicenses /></RequireAdmin>} />
           <Route path="/login-admin/manageagencies" element={<RequireAdmin><ManageAgencies /></RequireAdmin>} />
           <Route path="/login-admin/manageagencies/new" element={<RequireAdmin><IssuingAuthorityForm /></RequireAdmin>} />
+          <Route path="/login-admin/manageagencies/:id/edit" element={<RequireAdmin><IssuingAuthorityForm /></RequireAdmin>} />
           <Route path="/login-admin/managelocations" element={<RequireAdmin><ManageLocations /></RequireAdmin>} />
+          <Route path="/login-admin/managelocations/new" element={<RequireAdmin><JurisdictionForm /></RequireAdmin>} />
+          <Route path="/login-admin/managelocations/:id/edit" element={<RequireAdmin><JurisdictionForm /></RequireAdmin>} />
           <Route path="/login-admin/manageindustries" element={<RequireAdmin><ManageIndustries /></RequireAdmin>} />
           <Route path="/login-admin/managebusinesstypes" element={<RequireAdmin><ManageBusinessTypes /></RequireAdmin>} />
           <Route path="/login-admin/managebusinesstypes/new" element={<RequireAdmin><BusinessTypeForm /></RequireAdmin>} />
@@ -95,6 +105,8 @@ const App = () => (
           <Route path="/login-admin/manageworkflows" element={<RequireAdmin><ManageWorkflows /></RequireAdmin>} />
           <Route path="/login-admin/regulations/admin" element={<RequireAdmin><RegulationsDashboard /></RequireAdmin>} />
           <Route path="/login-admin/manageregulations" element={<RequireAdmin><ManageRegulations /></RequireAdmin>} />
+          <Route path="/login-admin/manageregulations/new" element={<RequireAdmin><ConsultationForm /></RequireAdmin>} />
+          <Route path="/login-admin/manageregulations/:id/edit" element={<RequireAdmin><ConsultationForm /></RequireAdmin>} />
           <Route path="/login-admin/managecomments" element={<RequireAdmin><ManageComments /></RequireAdmin>} />
           <Route path="/login-admin/managenews" element={<RequireAdmin><ManageNews /></RequireAdmin>} />
           <Route path="/login-admin/managepages" element={<RequireAdmin><ManagePages /></RequireAdmin>} />

@@ -12,6 +12,7 @@ export interface AgencyDetail extends BusinessAgency {
   offices: BusinessAgencyOffice[];
   industries: BusinessIndustry[];
   license_count: number;
+  users: { id: number; firstname: string; lastname: string; email: string }[];
 }
 
 export interface AgencyListParams {
@@ -33,5 +34,17 @@ export const agencyService = {
 
   getBySlug(slug: string) {
     return api.get<ApiResponse<BusinessAgency>>(`/agencies/slug/${slug}`);
+  },
+
+  create(data: Record<string, any>) {
+    return api.post<ApiResponse<BusinessAgency>>('/agencies', data);
+  },
+
+  update(id: number | string, data: Record<string, any>) {
+    return api.put<ApiResponse<BusinessAgency>>(`/agencies/${id}`, data);
+  },
+
+  delete(id: number | string) {
+    return api.delete<ApiResponse<any>>(`/agencies/${id}`);
   },
 };
