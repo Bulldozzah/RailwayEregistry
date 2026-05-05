@@ -44,6 +44,11 @@ app.use('/api/users', usersRouter);
 // Serve uploaded files
 app.use('/uploads', express.static(new URL('../uploads', import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ success: true, message: 'eRegistry API' });
+});
+
 // Health check
 app.get('/api/health', async (req, res) => {
   try {
