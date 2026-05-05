@@ -117,6 +117,11 @@ app.get('/api/stats', async (req, res) => {
   }
 });
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ success: true, message: 'eRegistry API' });
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.method} ${req.path} not found` });
